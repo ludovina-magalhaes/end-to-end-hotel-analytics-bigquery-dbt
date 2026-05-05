@@ -1,6 +1,6 @@
 # 🏨 Hotel Booking Analytics Platform
 
-## 📌 Descripción del proyecto
+##  Descripción del proyecto
 
 Este proyecto implementa un pipeline end-to-end de datos para el análisis de reservas hoteleras, con foco en revenue, cancelaciones y comportamiento del cliente.
 
@@ -8,7 +8,7 @@ El objetivo es transformar datos brutos en métricas de negocio listas para la t
 
 ---
 
-## 🧠 Objetivos
+##  Objetivos
 
 * Construir un pipeline completo desde ingestión hasta visualización
 * Aplicar modelado en capas (raw → staging → intermediate → marts)
@@ -18,7 +18,7 @@ El objetivo es transformar datos brutos en métricas de negocio listas para la t
 
 ---
 
-## 🏗 Arquitectura
+##  Arquitectura
 
 ```text
 Kaggle API
@@ -38,7 +38,7 @@ Power BI (dashboard)
 
 ---
 
-## ⚙️ Tecnologías utilizadas
+##  Tecnologías utilizadas
 
 * Python (pandas, kagglehub, google-cloud-bigquery)
 * Google BigQuery (Data Warehouse)
@@ -48,7 +48,7 @@ Power BI (dashboard)
 
 ---
 
-## 📥 Ingestión de datos
+##  Ingestión de datos
 
 ### Fuente de datos
 
@@ -84,7 +84,7 @@ analytics-enginner.raw.hotel_bookings
 
 ---
 
-## 🔐 Autenticación
+##  Autenticación
 
 Se utilizó una **cuenta de servicio de Google Cloud**:
 
@@ -99,7 +99,7 @@ GOOGLE_APPLICATION_CREDENTIALS="ruta/al/json"
 
 ---
 
-## 🧱 Modelado con dbt
+##  Modelado con dbt
 
 El proyecto sigue una arquitectura en capas:
 
@@ -113,7 +113,7 @@ Datos sin transformación.
 
 ---
 
-### 🔹 2. STAGING
+###  2. STAGING
 
 ```text
 analytics.stg_bookings
@@ -133,7 +133,7 @@ Transformaciones:
 
 ---
 
-### 🔹 3. INTERMEDIATE
+###  3. INTERMEDIATE
 
 ```text
 analytics.int_bookings_transformed
@@ -160,7 +160,7 @@ Enriquecimiento con lógica de negocio:
 
 ---
 
-### 🔹 4. FACT TABLE
+###  4. FACT TABLE
 
 ```text
 analytics.fct_bookings
@@ -177,39 +177,39 @@ Incluye:
 
 ---
 
-### 🔹 5. MARTS
+###  5. MARTS
 
 Tablas agregadas para análisis:
 
-#### 📊 mart_revenue
+####  mart_revenue
 
 * Revenue total, neto y perdido
 * ADR medio
 * RevPAR ajustado
 * Ocupación aproximada
 
-#### ⚠ mart_cancellations
+####  mart_cancellations
 
 * Cancelaciones por canal
 * Impacto económico
 * Lead time
 
-#### 👥 mart_behavior
+####  mart_behavior
 
 * Lead time medio
 * ADR por segmento
 * Clientes recurrentes
 
-#### 🏨 mart_operational
+####  mart_operational
 
 * Diferencia entre habitación reservada y asignada
 * Impacto en cancelación y revenue
 
-👉 Este mart representa el principal diferencial del proyecto.
+ Este mart representa el principal diferencial del proyecto.
 
 ---
 
-## 📊 Métricas clave
+##  Métricas clave
 
 ### Revenue
 
@@ -234,7 +234,7 @@ Tablas agregadas para análisis:
 
 ---
 
-## 📈 Visualización
+##  Visualización
 
 Conexión realizada con:
 
@@ -252,7 +252,7 @@ Dashboard estructurado en:
 
 ---
 
-## 🚀 Estado actual
+##  Estado actual
 
 ✔ Ingestión de datos
 ✔ Data Warehouse en BigQuery
@@ -263,7 +263,7 @@ Dashboard estructurado en:
 
 ---
 
-## 🔜 Próximos pasos
+##  Próximos pasos
 
 * Construcción completa del dashboard
 * Implementación de Airflow + Cosmos (orquestación)
@@ -273,7 +273,7 @@ Dashboard estructurado en:
 
 ---
 
-## 💡 Valor del proyecto
+##  Valor del proyecto
 
 Este proyecto simula un entorno real de trabajo como Analytics Engineer:
 
@@ -284,7 +284,7 @@ Este proyecto simula un entorno real de trabajo como Analytics Engineer:
 
 ---
 
-## 👩‍💻 Autor
+##  Autor
 
 Ludovina Magalhães
 Analytics Engineer
