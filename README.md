@@ -20,21 +20,8 @@ El objetivo es transformar datos brutos en métricas de negocio listas para la t
 
 ##  Arquitectura
 
-```text
-Kaggle API
-   ↓
-Python (Ingestión)
-   ↓
-BigQuery (raw)
-   ↓
-dbt (staging)
-   ↓
-dbt (intermediate)
-   ↓
-dbt (marts / fact)
-   ↓
-Power BI (dashboard)
-```
+<img width="1359" height="579" alt="image" src="https://github.com/user-attachments/assets/a58d1d70-bad3-4e0a-9b1b-3f9fc8785141" />
+
 
 ---
 
