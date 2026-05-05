@@ -1,0 +1,186 @@
+
+     version: 2
+
+models:
+  - name: int_bookings_transformed
+    description: >
+      Modelo intermedio que enriquece las reservas con métricas derivadas,
+      segmentaciones analíticas y atributos reutilizables para facts y marts.
+      Grain: una fila por reserva.
+
+    columns:
+      - name: booking_sk
+        description: "Clave técnica derivada de la reserva."
+        tests:
+          - not_null
+
+      - name: hotel
+        description: "Tipo de hotel."
+        tests:
+          - not_null
+
+      - name: is_canceled
+        description: "Indicador binario de cancelación. 1 = cancelada, 0 = confirmada."
+        tests:
+          - not_null
+
+      - name: is_canceled_flag
+        description: "Flag booleana de cancelación."
+
+      - name: lead_time
+        description: "Días entre la reserva y la llegada."
+
+      - name: arrival_date
+        description: "Fecha de llegada."
+        tests:
+          - not_null
+
+      - name: arrival_year
+        description: "Año de llegada derivado de arrival_date."
+
+      - name: arrival_month_number
+        description: "Número del mes de llegada derivado de arrival_date."
+
+      - name: arrival_quarter
+        description: "Trimestre de llegada derivado de arrival_date."
+
+      - name: arrival_weekday_name
+        description: "Nombre del día de la semana de llegada."
+
+      - name: total_nights
+        description: "Número total de noches de la reserva."
+        tests:
+          - not_null
+
+      - name: total_guests
+        description: "Número total de huéspedes."
+        tests:
+          - not_null
+
+      - name: market_segment
+        description: "Segmento de mercado."
+
+      - name: distribution_channel
+        description: "Canal de distribución."
+
+      - name: country
+        description: "País de origen del cliente."
+
+      - name: customer_type
+        description: "Tipo de cliente."
+
+      - name: is_repeated_guest
+        description: "Indicador de cliente repetido."
+
+      - name: previous_cancellations
+        description: "Número de cancelaciones previas del cliente."
+
+      - name: previous_bookings_not_canceled
+        description: "Número de reservas previas no canceladas del cliente."
+
+      - name: total_previous_bookings
+        description: "Total de reservas previas del cliente (canceladas + no canceladas)."
+
+      - name: historical_cancellation_rate
+        description: "Tasa histórica de cancelación del cliente. Null si no hay historial previo."
+
+      - name: has_previous_cancellations_flag
+        description: "Flag booleana. True si el cliente tiene cancelaciones previas."
+
+      - name: has_previous_successful_bookings_flag
+        description: "Flag booleana. True si el cliente tiene reservas previas completadas."
+
+      - name: reserved_room_type
+        description: "Tipo de habitación reservada."
+
+      - name: assigned_room_type
+        description: "Tipo de habitación asignada."
+
+      - name: room_changed_flag
+        description: "Flag booleana. True si la habitación asignada difiere de la reservada."
+
+      - name: room_change_type
+        description: "Tipo de cambio de habitación: upgrade, downgrade o no_change."
+        tests:
+          - accepted_values:
+              values: ['upgrade', 'downgrade', 'no_change']
+
+      - name: adr
+        description: "Average Daily Rate de la reserva."
+
+      - name: gross_booking_amount
+        description: "Importe bruto estimado de la reserva."
+        tests:
+          - not_null
+
+      - name: net_booking_amount
+        description: "Importe neto estimado de la reserva, excluyendo cancelaciones."
+        tests:
+          - not_null
+
+      - name: canceled_booking_amount
+        description: "Importe estimado perdido por cancelación."
+        tests:
+          - not_null
+
+      - name: revenue_per_guest
+        description: "Revenue estimado por huésped. Null si total_guests = 0."
+
+      - name: lead_time_segment
+        description: "Segmentación del lead time."
+        tests:
+          - accepted_values:
+              values: ['last_minute', 'short_term', 'mid_term', 'long_term']
+
+      - name: guest_segment
+        description: "Segmentación por número de huéspedes."
+        tests:
+          - accepted_values:
+              values: ['solo', 'couple', 'small_group', 'large_group']
+
+      - name: stay_segment
+        description: "Segmentación por duración de estancia."
+        tests:
+          - accepted_values:
+              values: ['short_stay', 'medium_stay', 'long_stay']
+
+      - name: special_request_segment
+        description: "Segmentación por solicitudes especiales."
+        tests:
+          - accepted_values:
+              values: ['no_requests', 'few_requests', 'many_requests']
+
+      - name: booking_changes
+        description: "Número de cambios realizados en la reserva."
+
+      - name: deposit_type
+        description: "Tipo de depósito."
+
+      - name: agent_id
+        description: "Identificador del agente."
+
+      - name: company_id
+        description: "Identificador de la empresa."
+
+      - name: days_in_waiting_list
+        description: "Días en lista de espera."
+
+      - name: required_car_parking_spaces
+        description: "Plazas de aparcamiento solicitadas."
+
+      - name: total_of_special_requests
+        description: "Número total de solicitudes especiales."
+
+      - name: reservation_status
+        description: "Estado final de la reserva."
+        tests:
+          - accepted_values:
+              values: ['Check-Out', 'Canceled', 'No-Show']
+
+      - name: reservation_status_date
+        description: "Fecha del estado final de la reserva."
+
+      - name: ingestion_ts
+        description: "Timestamp de ingestión del dato raw."
+        tests:
+          - not_null

@@ -1,0 +1,120 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Dataset raw en BigQuery que contiene los datos originales de reservas hoteleras."
+    database: "{{ target.project }}"
+    schema: "{{ var('raw_dataset', 'raw') }}"
+    loader: "python_ingestion"
+
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
+    loaded_at_field: ingestion_ts
+
+    tables:
+      - name: hotel_bookings
+        description: "Tabla raw con los datos originales del dataset Hotel Booking Demand."
+
+        columns:
+          - name: hotel
+            description: "Tipo de hotel."
+
+          - name: is_canceled
+            description: "Indicador de cancelación de la reserva. 1 = cancelada, 0 = no cancelada."
+
+          - name: lead_time
+            description: "Número de días entre la fecha de reserva y la fecha de llegada."
+
+          - name: arrival_date_year
+            description: "Año de llegada."
+
+          - name: arrival_date_month
+            description: "Mes de llegada en formato textual."
+
+          - name: arrival_date_week_number
+            description: "Número de semana de la llegada."
+
+          - name: arrival_date_day_of_month
+            description: "Día del mes de llegada."
+
+          - name: stays_in_weekend_nights
+            description: "Número de noches de fin de semana."
+
+          - name: stays_in_week_nights
+            description: "Número de noches entre semana."
+
+          - name: adults
+            description: "Número de adultos incluidos en la reserva."
+
+          - name: children
+            description: "Número de niños incluidos en la reserva."
+
+          - name: babies
+            description: "Número de bebés incluidos en la reserva."
+
+          - name: meal
+            description: "Tipo de comida reservada."
+
+          - name: country
+            description: "País de origen del cliente."
+
+          - name: market_segment
+            description: "Segmento de mercado."
+
+          - name: distribution_channel
+            description: "Canal de distribución."
+
+          - name: is_repeated_guest
+            description: "Indicador de cliente repetido. 1 = sí, 0 = no."
+
+          - name: previous_cancellations
+            description: "Número de cancelaciones previas."
+
+          - name: previous_bookings_not_canceled
+            description: "Número de reservas previas no canceladas."
+
+          - name: reserved_room_type
+            description: "Tipo de habitación reservada."
+
+          - name: assigned_room_type
+            description: "Tipo de habitación asignada."
+
+          - name: booking_changes
+            description: "Número de cambios realizados en la reserva."
+
+          - name: deposit_type
+            description: "Tipo de depósito."
+
+          - name: agent
+            description: "Identificador del agente, cuando aplica."
+
+          - name: company
+            description: "Identificador de la empresa, cuando aplica."
+
+          - name: days_in_waiting_list
+            description: "Número de días en lista de espera."
+
+          - name: customer_type
+            description: "Tipo de cliente."
+
+          - name: adr
+            description: "Average Daily Rate."
+
+          - name: required_car_parking_spaces
+            description: "Número de plazas de aparcamiento solicitadas."
+
+          - name: total_of_special_requests
+            description: "Número total de solicitudes especiales."
+
+          - name: reservation_status
+            description: "Estado final de la reserva."
+
+          - name: reservation_status_date
+            description: "Fecha del último estado de la reserva en la tabla raw."
+
+          - name: ingestion_ts
+            description: "Timestamp de ingestión en la capa raw."
+            tests:
+              - not_null

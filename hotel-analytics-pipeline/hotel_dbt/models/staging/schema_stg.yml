@@ -1,0 +1,149 @@
+version: 2
+
+models:
+  - name: stg_bookings
+    description: >
+      Modelo de staging para el dataset de reservas hoteleras.
+      Normaliza tipos de datos, construye la fecha de llegada,
+      crea métricas derivadas básicas y deja la base preparada
+      para modelos intermedios, facts y marts.
+      Grain: una fila por registro raw de reserva.
+
+    columns:
+      - name: booking_sk
+        description: "Clave técnica derivada de la reserva. No se garantiza unicidad en staging debido a la ausencia de un identificador natural único en la fuente."
+        tests:
+          - not_null
+
+      - name: hotel
+        description: "Tipo de hotel."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Resort Hotel', 'City Hotel']
+
+      - name: is_canceled
+        description: "Indicador binario de cancelación. 1 = cancelada, 0 = confirmada."
+        tests:
+          - not_null
+
+      - name: lead_time
+        description: "Número de días entre la reserva y la llegada."
+        tests:
+          - not_null
+
+      - name: arrival_date_year
+        description: "Año de llegada."
+
+      - name: arrival_date_month
+        description: "Mes de llegada en texto."
+
+      - name: arrival_date_week_number
+        description: "Número de semana de llegada."
+
+      - name: arrival_date_day_of_month
+        description: "Día del mes de llegada."
+
+      - name: arrival_date
+        description: "Fecha completa de llegada construida a partir de año, mes y día."
+        tests:
+          - not_null
+
+      - name: stays_in_weekend_nights
+        description: "Número de noches de fin de semana."
+
+      - name: stays_in_week_nights
+        description: "Número de noches entre semana."
+
+      - name: adults
+        description: "Número de adultos."
+
+      - name: children
+        description: "Número de niños. Nulos sustituidos por 0."
+
+      - name: babies
+        description: "Número de bebés."
+
+      - name: meal
+        description: "Tipo de comida reservada."
+
+      - name: country
+        description: "País de origen del cliente."
+
+      - name: market_segment
+        description: "Segmento de mercado."
+
+      - name: distribution_channel
+        description: "Canal de distribución."
+
+      - name: is_repeated_guest
+        description: "Indicador de cliente repetido. 1 = repetido, 0 = nuevo."
+
+      - name: previous_cancellations
+        description: "Número de cancelaciones previas del cliente."
+
+      - name: previous_bookings_not_canceled
+        description: "Número de reservas previas no canceladas del cliente."
+
+      - name: reserved_room_type
+        description: "Tipo de habitación reservada."
+
+      - name: assigned_room_type
+        description: "Tipo de habitación asignada."
+
+      - name: booking_changes
+        description: "Número de cambios realizados en la reserva."
+
+      - name: deposit_type
+        description: "Tipo de depósito."
+
+      - name: agent_id
+        description: "Identificador del agente."
+
+      - name: company_id
+        description: "Identificador de la empresa."
+
+      - name: days_in_waiting_list
+        description: "Días en lista de espera."
+
+      - name: customer_type
+        description: "Tipo de cliente."
+
+      - name: adr
+        description: "Average Daily Rate de la reserva."
+
+      - name: required_car_parking_spaces
+        description: "Plazas de aparcamiento solicitadas."
+
+      - name: total_of_special_requests
+        description: "Número total de solicitudes especiales."
+
+      - name: reservation_status
+        description: "Estado final de la reserva."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Check-Out', 'Canceled', 'No-Show']
+
+      - name: reservation_status_date
+        description: "Fecha del estado final de la reserva."
+        tests:
+          - not_null
+
+      - name: ingestion_ts
+        description: "Timestamp de ingestión del registro raw."
+        tests:
+          - not_null
+
+      - name: total_nights
+        description: "Total de noches de la estancia. Suma de noches de fin de semana y entre semana."
+        tests:
+          - not_null
+
+      - name: total_guests
+        description: "Total de huéspedes. Suma de adultos, niños y bebés."
+        tests:
+          - not_null
+
+      - name: is_canceled_flag
+        description: "Flag booleana de cancelación derivada de is_canceled."
