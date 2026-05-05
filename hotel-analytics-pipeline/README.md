@@ -1,6 +1,7 @@
-# 🛒 End-to-End E-Commerce Analytics Platform
+#  End-to-End E-Commerce Analytics Platform # 🏨 Hotel Booking Analytics Platform
 
-Proyecto completo de Analytics Engineering que simula un entorno real de e-commerce, desde la generación de datos hasta la construcción de modelos analíticos orientados a negocio.
+Pipeline end-to-end de análisis de reservas hoteleras con BigQuery, dbt y Power BI.
+
 
 ---
 
