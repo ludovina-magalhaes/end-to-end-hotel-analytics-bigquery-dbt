@@ -1,4 +1,4 @@
-#  End-to-End E-Commerce Analytics Platform # 🏨 Hotel Booking Analytics Platform
+#  End-to-End Hotel Booking Analytics Platform
 
 Pipeline end-to-end de análisis de reservas hoteleras con BigQuery, dbt y Power BI.
 
