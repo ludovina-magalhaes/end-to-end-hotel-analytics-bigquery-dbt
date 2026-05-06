@@ -20,7 +20,8 @@ El objetivo es transformar datos brutos en métricas de negocio listas para la t
 
 ##  Arquitectura
 
-<img width="1359" height="579" alt="image" src="https://github.com/user-attachments/assets/a58d1d70-bad3-4e0a-9b1b-3f9fc8785141" />
+<img width="1404" height="629" alt="image" src="https://github.com/user-attachments/assets/f4d95d1f-08a9-4d6f-a064-3a5ee78dbde2" />
+
 
 
 ---
